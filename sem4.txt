@@ -78,4 +78,62 @@ számelm gyak
 szofttech gyak
 	Novák Márk
 	Teamsen keressük
+
+nummód gyak
+	Bognár Gergõ
+	10:15
+	Két zh
+		ha valamelyik nem sikerül, akkor javító zhvan
+		ha kettõ nem sikerül, gyakuv
+	házi feladatok
+		közzé van téve egy lista
+		május 10(?)ig lehet leadni õket
+			egybe kell feltölteni õket
+			mi döntjük el hogy melyiket/milyen sorrendben/hányat csinálunk
+		max 15 pluszpont
+
+telekom gyak
+	Kecskeméti Károly, tegezls
+	email: cgsmef@inf.elte.hu
+	de teamsen írjunk (24 órán belül reply)
+	14:15
+	max 4 hiányzás
+	Számonkérés:
+		Szocket zh (!! 50% elérés szükséges !!)
+			python, de ez csak másodlagos skill
+			házikhoz hasonló
+		
+		mininet nagyprojekt
+			routing, tûzfal, IP cím beállítások
+			hálózat szimulációs eszköz, elõadásra épülõ anyag
+		Python, socket házis (kb 5)
+			TMS rendszeren automaikusan tesztelve
+				nem azonnal, kell neki idõ, ne utolsó percre hagyjuk!
+				(fõleg deadline utolsó óráiban meg van terhelve)
+				kódhasonlóságot nézik
+			százalékos értékelés
+		pótzh van, gyakuv nincs
+		extra javítási lehetõségekrõl lehet beszélni
+		7 pluszpont = plusz 1 jegy?
+		szorgalmikat teams dm-be fileként
+
+opre gyak
+	16:00-16:45
+	Korom szilárd
+		Alapból teames emailen
+		Ha minden kötél szakad: korom.szilard@gmail.com
+	adminisztráció canvas ea+gy csoport
+	két zh
+		egy elõadás
+		egy gyakorlat
+	Két beadandó, egymásra épülnek
+		második zhra kb teljesen felkészítenek
+		max 1 hét késés, azon felül nincs jegy!
+		határidõn belül akárhányszor be lehet adni
+	van tantárgyi honlap, de canvas hivatalos
+	ajánlott könyv: tananbau könyv
+
+	
+
+
 	
