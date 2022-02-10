@@ -13,6 +13,69 @@ számgráf gyak
 	Hiányzások:
 		Kötelezõ jelenlét
 		Nézni fogja teamsen
+
 opre ea
 	1600-1700
 		Lehet menni bármelyik elõadásra
+
+számelm ea
+	vizsga
+		feleletválasztós
+			online vizsga esetén összefüggésekre, minimális gyakorlatias feladatok lesznek, kb 35 perc
+		elõvizsgán aki 3/4 mehet tovább szóbelire
+		ketteshez 12/30 kell
+
+nummód ea
+	Kovács Péter
+	https://numanal.inf.elte.hu/~kovi/
+	segédanyagok:
+		https://numanal.inf.elte.hu/~kovi/lecturenotes.html
+	könyv: Gergó Lajos, Numerikus módszerek: kidolgozott példák, feladatok, ELTE Eötvös Kiadó, 2010.
+		3/4hez elég diák is, 5öshöz kell a könyv
+	példatár: Bozsik József, Krebsz Anna, Numerikus módszerek példatár
+		gyakorlathoz ajánlott
+	ea diák canvas/fileok
+	vizsga: kvízzel
+		emelt szintû szóbeli: nem konkrétan definíciókra kérdez, hanem közvetetten
+			tehát tételeket használni kell a megoldásokhoz
+		15 kérdés, 5 egyszerûbb, 8-at kell tudni ketteshez
+		mintavizsga már most is fent van
+	minden elõadásról felvétel
+
+szofftech
+	félév végi teszt:
+		15bõl 10 kérdést kell megválaszolni
+		szofttech+progtech anyag kell kozni
+
+adatb gyak
+	Vörös Péter, tegezés
+	08:30
+	minden órán lesz feladat amit be kell adni
+		ez lesz az órai jelenlét
+		mindent amit az órán csináltunk, canvas feladatba fel kell tölteni
+	számonkérés: 2zh
+		egyiket lehet javítani utolsó gyakon
+			itt a régi és az új jegy átlaga lesz a végleges jegy
+
+számgráf ea
+	Bán Róbert
+	10:15
+	felvétel elvileg lesz, de lehet elfelejti..?
+
+számelm gyak
+	Mácskovity Máté, tegezés, teamsen írjunk
+	12:15?
+	követelmények
+		két zh lesz
+			ha hibridben, akkor A/Bhez egy-egy jelenléti zht
+		zh-k 33%októl pass
+		egész tárgyra 40%al pass
+		javító/pótzh: egy darab lehetõség 13. gyakorlaton
+			minden esetben felülírja az eredetit
+		van gyakuv is (ha nincs túl sok hiányzás)
+		hiányzás: 4 megengedett nyomós okkal
+
+szofttech gyak
+	Novák Márk
+	Teamsen keressük
+	
