@@ -76,58 +76,82 @@ int main( int argc, char* args[] )
 	// 3. lépés: töröljük az ablak háttérszínét, rajzoljunk egy vonalat és várjunk 2 másodpercet
 	//
 
-	// aktuális rajzolási szín legyen fekete és töröljük az aktuális rajzolási színnel az ablak kliensterületét
+	// aktuális rajzolási szín legyen feket - 
 	SDL_SetRenderDrawColor(	ren,	// melyik renderelőnek állítjuk be az aktuális rajzolási színét
 							0,		// vörös intenzitás - 8 bites előjel nélküli egész szám
 							0,		// zöld intenzitás - 8 bites előjel nélküli egész szám
 							0,		// kék intenzitás - 8 bites előjel nélküli egész szám
 							255);	// átlátszóság - 8 bites előjel nélküli egész szám
+
+	// - és töröljük az aktuális rajzolási színnel az ablak kliensterületét
 	SDL_RenderClear(ren);
 
-	// aktuális rajzolási szín legyen zöld és rajzoljunk ki egy vonalat
+	// aktuális rajzolási szín legyen zöld - 
 	SDL_SetRenderDrawColor(	ren,	// renderer címe, aminek a rajzolási színét be akarjuk állítani
 							0,		// piros
 							255,	// zöld
 							0,		// kék
 							255);	// átlátszatlanság
 
+	// - és rajzoljunk ki egy vonalat
 	SDL_RenderDrawLine(	ren,	// renderer címe, amivel vonalat akarunk rajzolni
 						10, 10, // vonal kezdőpontjának (x,y) koordinátái
 						10, 60);// vonal végpontjának (x,y) koordinátái
+	
+	// ####################################
+	//			FELADATOK
+	// ####################################
 
 	// 1. feladat: egészítsük ki a fenti vonalat egy H betűvé!
 
-	SDL_RenderDrawLine(ren, 50, 10, 50, 60);
-	SDL_RenderDrawLine(ren, 10, 35, 50, 35);
+	SDL_RenderDrawLine(ren, 40, 10, 40, 60);
+	SDL_RenderDrawLine(ren, 10, 35, 40, 35);
 
-	//O az legyen ellipszis (magasabb mint szélesebb)
-	// tipp hozzá: parametric representation függvény
+	// 2. beadható feladat: írjuk ki a "HELLO" szöveget a képernyőre!
+    
+	//E
+	SDL_RenderDrawLine(ren, 50, 10, 50, 60);  //vert
+	SDL_RenderDrawLine(ren, 50, 10, 80, 10); //horiz top
+	SDL_RenderDrawLine(ren, 50, 35, 80, 35); //horiz mid
+	SDL_RenderDrawLine(ren, 50, 60, 80, 60); //horiz bot
+
+	//L
+	SDL_RenderDrawLine(ren, 90, 10, 90, 60);  //vert
+	SDL_RenderDrawLine(ren, 90, 60, 120, 60); //horiz top
+
+	//L
+	SDL_RenderDrawLine(ren, 130, 10, 130, 60);  //vert
+	SDL_RenderDrawLine(ren, 130, 60, 150, 60); //horiz top
+
+
+
+
+
+	//O az legyen ellipszis (magasabb mint szélesebb) (parametric representation függvény)
 	// main.cpp-t kell elküldeni
-	// 2. beadható feladat: írjuk ki a "HELLO" szöveget a képernyőre! Ehhez használható a
 	//sorrendben összeköti a pontokat:
-	// SDL_RenderDrawLines( <renderer ptr>, <SDL_Point tömb>, <pontok száma>); parancs!
+		// SDL_RenderDrawLines( <renderer ptr>, <SDL_Point tömb>, <pontok száma>); parancs!
 
 	//kör rajzolása
 		//n egyenes szakaszra bontással
-	const int numOfPoints = 30;
+	const int numOfPoints = 35;
 	SDL_Point points[numOfPoints+1];
-	float r = 40;
-	int cx = 100, cy = 100;
-	float alpha = 2 * M_PI / numOfPoints; //egy szakaszhoz tartozó körcikk foka
+	float r = 20;
+	float scaleX = 1.0f, scaleY = 1.25f;
+	int cx = 180, cy = 35;
+	float alpha = 2 * M_PI / numOfPoints; //egy szakaszhoz tartozó körcikk foka radiánban
 
-	//TODO: mi a geometriai háttere? nem figyeltem
 	for (int i = 0; i <= numOfPoints; i++)
 	{
-		//cpp inicializálós lista baszakszás:
+		//cpp inicializálós lista thingy:
 			//points[i] = {1,2} ekvivalens = SDL_Point(1,2)
 
-		//TODO: nem teljes kör valamiért?
-
 		//Fontos: cosf/sinf függvények radiánnal dolgoznak
-		points[i] = {cx + (int)(r * cosf(alpha * i)), cy + (int) (r * sinf(alpha * i)) };
+		points[i] = { cx + (int)(scaleX * r * cosf(alpha * i)), 
+					  cy + (int)(scaleY * r * sinf(alpha * i)) };
 	}
 
-	SDL_RenderDrawLines(ren, points, numOfPoints);
+	SDL_RenderDrawLines(ren, points, numOfPoints+1);
 
 	// 3. feladat: 2 másodpercenként változzon a háttér színe! Először legyen piros, aztán zöld és végül kék,
 	// majd lépjen ki a program!
@@ -139,29 +163,21 @@ int main( int argc, char* args[] )
 	SDL_Delay(3000);
 
 	//piros háttér
-	SDL_SetRenderDrawColor(ren,	// melyik renderelőnek állítjuk be az aktuális rajzolási színét
-		255,	// vörös intenzitás - 8 bites előjel nélküli egész szám
-		0,		// zöld intenzitás - 8 bites előjel nélküli egész szám
-		0,		// kék intenzitás - 8 bites előjel nélküli egész szám
-		255);	// átlátszóság - 8 bites előjel nélküli egész szám
+	SDL_SetRenderDrawColor(ren, 255, 0, 0, 255);	
 	SDL_RenderClear(ren);
 	SDL_RenderPresent(ren);
 
 	SDL_Delay(2000);
 
 	//zöld háttér
-	SDL_SetRenderDrawColor(ren,	0,0,0,255);	
+	SDL_SetRenderDrawColor(ren,	0, 255, 0, 255);	
 	SDL_RenderClear(ren);
 	SDL_RenderPresent(ren);
 
 	SDL_Delay(2000);
 
 	//kék háttér
-	SDL_SetRenderDrawColor(ren,	
-		0,		// 
-		0,		// 
-		255,	// 
-		255);	
+	SDL_SetRenderDrawColor(ren,	0, 0, 255, 255);	
 	SDL_RenderClear(ren);
 	SDL_RenderPresent(ren);
 

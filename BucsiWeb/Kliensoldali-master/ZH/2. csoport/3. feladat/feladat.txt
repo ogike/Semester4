@@ -1,0 +1,52 @@
+3. feladat: Telefonkönyv (12 pont)
+
+Progresszív fejlesztéssel okosítsd fel a megadott űrlapot! 2 féle telefonszám (mobil, vezetékes) megadása lehetséges, 2 különböző input mezőben. A feladatod, hogy szétválaszd az előhívószámot és körzetszámot a többi számjegytől, hogy a következő formátumban lehessen megadni:
+
+0620 / 1234567
+061 / 1234567
+
+A felokosítást követően 2 gombbal lehessen hozzáadni ezeket a mezőket, illetve legyen lehetőség őket eltávolítani.
+
+Nincs előre beégetett adat!
+
+A beírt adatokat nem kell validálni (most kivételesen)!
+
+A form submit eseményével most nem kell foglalkozni!
+
+Ha shadow dom-ot használsz, a bootstrap működéséhez másold be ezt a metódust a class-ba és hívd meg a konstruktorból.
+
+// javascript kód
+getBootstrap() {
+    const style = document.createElement('style');
+    style.innerHTML = '@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css");';
+    this.shadowRoot.appendChild(style);
+}
+// javascript kód vége
+
+Részfeladatok
+
+1. Generálj két gombot, "Mobil" és "Vezetékes" feliratokkal. (2 pont)
+   Add hozzájuk a btn, btn-primary és m-2 stílusosztályokat (class)!
+   Az id-jaikat állítsd be "Mobil"-ra vagy "Vezetékes"-re (ez a későbbiekben jól fog jönni)
+   Adj hozzájuk eventListener-t click eseményre! Kattintás után állítsd disabled-re és hívd meg a metódust, amivel kigenerálod a megfelelő beviteli csoportot!
+
+2. Készíts egy metódust, amivel az űrlaphoz adsz egy beviteli csoportot (ld.: template)! (4 pont)
+   A h5 címsort állítsd be annak megfelelően, hogy a Mobil-ra vagy a Vezetékes-re kattintottunk!
+   A select-et töltsd fel az alábbi minta előhívószámokkal/körzetszámokkal!
+
+// javascript kód
+const options = {
+    mobile: ['0620', '0630', '0650', '0660', '0670'],
+    landline: ['061', '0622', '0623', '0674', '0675']
+}
+//javascript kód vége
+
+    A button-höz adj eventListener-t click eseményre! Töröld a teljes beviteli csoportot! Az 1. pontban legenerált gombok közül a megfelelő disabled adattagját állítsd false-ra!
+       Tipp: A teljes sor törléséhez használd a closest('.row') metódust!
+
+3. Használd az index.html-ben lévő template-et! (2 pont)
+
+4. Használj shadow dom-ot! (2 pont)
+
+5. Zárdd egységbe a megoldást! (2pont)
+   customElements VAGY konstruktorhívással new myBeautifulClass(...)

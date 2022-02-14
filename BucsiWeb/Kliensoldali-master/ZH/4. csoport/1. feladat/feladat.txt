@@ -1,0 +1,44 @@
+1. feladat: Tesla árfolyam (9 pont)
+
+A Chart.js (https://www.chartjs.org/) javascript könyvtár segítségével készíts egy két adathalmazt tartalmazó vonaldiagramot! Az árfolyamadatokat a 1. feladat/index.js file data konstans változója tartalmazza.
+
+Példa a data tartalmára:
+// json adatminta
+{
+    // ...
+    "2021-02-09": {
+        "open": "855.1200",
+        "high": "859.8000",
+        "low": "841.7500",
+        "close": "849.4600",
+        "volume": "15027305"
+    },
+    // ...
+}
+// json adatminta vége
+
+Részfeladatok
+
+1. JSDelivr-en (https://www.chartjs.org/docs/latest/getting-started/) keress rá a chart.js-re (fejlesztő: chartjs) és az alapértelmezett csomagjának hivatkozását illeszd be az 1. feladat/index.html file végére. Ügyelj arra, hogy az index.js mindenképpen a most beillesztett könyvtár után legyen! (1 pont)
+
+2. Készíts két tömböt (például: high, low) és töltsd fel őket a data-ban lévő object-ek azonos nevű adattagjaival. Figyelj arra, hogy a tömbökbe már számként kerüljenek be! (parseFloat()) Ezt követően írd ki a két tömböt a console-ra! (3 pont)
+   Tipp: Használd az Object.values(data) metódust!
+
+3. Készítsd el a diagramot a következő lépések mentén! (5 pont)
+   Minta: https://www.chartjs.org/docs/latest/getting-started/
+   Vonaldiagram: https://www.chartjs.org/docs/latest/charts/line.html
+   A DOM-ból emeld ki a #tesla azonosítójú canvas elemet!
+   Példányosítsd a Chart osztályt a new Chart(canvas, options) konstruktorral!
+   Az options-ben a következő beállításokat végezd el!
+     A diagram típusa legyen line!
+     Az x-tengely feliratai legyenek a data kulcsai (a dátumok) (Tipp: az Object osztály melyik metódusa lehet itt a segítségünkre?)
+     A napi legmagasabb értékek beállítása a következők legyenek:
+       Az adathalmaz címkéje legyen "Napi legmagasabb értékek"
+       Az adatokat a high változó tartalmazza
+       A vonal színe (borderColor) legyen: 'rgba(0, 56, 68, 1)'
+       A vonal alatti terület színe (bachgroundColor) legyen: 'rgba(0, 56, 68, 0.2)'
+     A napi legalacsonyabb értékek beállítása a következők legyenek:
+       Az adathalmaz címkéje legyen "Napi legalacsonyabb értékek"
+       Az adatokat a low változó tartalmazza
+       A vonal színe (borderColor) legyen: 'rgba(0, 108, 103, 1)'
+       A vonal alatti terület színe (bachgroundColor) legyen: 'rgba(0, 108, 103, 0.2)'

@@ -10,6 +10,7 @@ számgráf gyak
 			Beadandóval ki lehet váltani ha pluszban van pontod
 			Zh-ra neptunban kell jelentkezni majd
 	órai munkás beadandók: kövi óra kezdetéig
+		teamsen, main.cpp-ként alapból
 	Hiányzások:
 		Kötelezõ jelenlét
 		Nézni fogja teamsen
@@ -132,6 +133,14 @@ opre gyak
 		határidõn belül akárhányszor be lehet adni
 	van tantárgyi honlap, de canvas hivatalos
 	ajánlott könyv: tananbau könyv
+
+adatb ea
+	0830
+	Szalai-Gindl János Márk
+	honlap: szalaigj.web.elte.hu
+	tankönvy: ullman, widom: adatbázisrendszerek
+	alapból akkor lehet kérdezni, ha mondja
+
 
 	
 

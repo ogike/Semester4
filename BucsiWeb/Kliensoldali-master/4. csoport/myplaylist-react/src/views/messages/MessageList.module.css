@@ -1,0 +1,8 @@
+.MessageList {
+    position: fixed;
+    top: 0;
+    right: 0;
+    text-align: center;
+    margin: 20px;
+    opacity: 0.9;
+}

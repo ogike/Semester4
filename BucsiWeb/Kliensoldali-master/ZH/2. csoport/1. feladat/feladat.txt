@@ -1,0 +1,37 @@
+1. feladat: Covid megyénkénti eloszlás (9 pont)
+
+A (Chart.js)[https://www.chartjs.org/] javascript könyvtár segítségével készíts egy adathalmazt tartalmazó tortadiagramot! A szükséges adatokat a 1. feladat/index.js file data konstans változója tartalmazza.
+
+Példa a data tartalmára:
+
+// json kód
+{
+    // ...
+    "Budapest": {
+        "color": "rgba(106,102,213,0.8)",
+        "covid": "82044"
+    },
+    // ...
+}
+// json kód vége
+
+Részfeladatok
+
+1. JSDelivr-en (https://www.chartjs.org/docs/latest/getting-started/) keress rá a chart.js-re (fejlesztő: chartjs) és az alapértelmezett csomagjának hivatkozását illeszd be az 1. feladat/index.html file végére. Ügyelj arra, hogy az index.js mindenképpen a most beillesztett könyvtár után legyen! (1 pont)
+
+2. Készíts két tömböt (pl.: covid, color) és töltsd fel őket a data-ban lévő object-ek azonos nevű adattagjaival. Figyelj arra, hogy a covid tömbbe már számként kerüljenek be! (parseInt()) Ezt követően írd ki a két tömböt a console-ra! (3 pont)
+   Tipp: Használd az Object.values(data) metódust!
+
+3. Készítsd el a diagramot a következő lépések mentén! (5 pont)
+   Minta: https://www.chartjs.org/docs/latest/getting-started/
+   Tortadiagram: https://www.chartjs.org/docs/latest/charts/doughnut.html
+   
+   A DOM-ból emeld ki a #covid azonosítójú canvas elemet!
+   Példányosítsd a Chart osztályt a new Chart(canvas, options) konstruktorral!
+   Az options-ben a következő beállításokat végezd el!
+      A diagram típusa legyen pie!
+      Az x-tengely feliratai legyenek a data kulcsai (a megyenevek)
+         Tipp: az Object osztály melyik metódusa lehet itt a segítségünkre?
+      A napi legmagasabb értékek beállítása a következők legyenek:
+         Az adatokat a covid változó tartalmazza
+         A körcikkek színe (bachgroundColor) legyen a color változó tartalma

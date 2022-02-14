@@ -1,0 +1,17 @@
+2. feladat: Színváltó doboz (9 pont)
+
+Adott egy képernyő méretű div elem, amelynek az alsó és felső margója megegyezik a viewport magasságával. A feladatod, hogy felokosítsd az alábbiak szerint ezt a dobozt. A div háttérszínének áttetszősége (nem a div opacity értéke!), a viewport-ba érve, a viewport közepéhez viszonyítva változzon az rgba(0, 56, 68, 0) és rgba(0, 56, 68, 1) között. Mindezt aszerint, hogy a viewport közepe a div hányad részénél van. Ehhez segítségül a képernyő közepén van egy rögzített szürke csík (a feladat megoldásához nem kell használni).
+
+Részfeladatok
+
+1. Készíts egy függvényt (getThreshold), ami bemenetként vár egy egész számot (n) és visszaad egy tömböt, ami n + 1 db, [0,1] közötti értékeket tartalmaz egyenletes eloszlással. (2 pont)
+   például: getThreshold(5) === [0, 0.2, 0.4, 0.6, 0.8, 1]
+
+2. Készíts egy IntersectionObserver-t és hívd meg a .square stílusosztályú elemre! A konstruktorban a threshold-nál hívd meg a getThreshold függvényt egy tetszőleges paraméterrel (például: 20; figyelj arra, hogy minél nagyobb számot adsz meg, annál többször fog lefutni a konstruktorban átadott callback függvény)! (2 pont)
+
+3. Az observer konstruktorában átadott függvényben számítsd ki, hogy a viewport közepe a div-et "hányad" részénél metszi. (4 pont)
+   Tipp: Az IntersectionObserverEntry-nek a boundClientRect-en belüli adatokra lesz szükséged, ez azonos a getBoundingClientRect() algoritmusa által generáltakkal.
+   Tipp: A viewport magasságát a window.innerHeight adattagon keresztül éred el.
+
+4. Állítsd be a kiszámított érték alapján a div háttérszínét! (1 pont)
+   Tipp: `rgba(0, 56, 68, ${ratio})`
