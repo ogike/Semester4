@@ -20,6 +20,7 @@ opre ea
 		Lehet menni bármelyik elõadásra
 
 számelm ea
+	11:15
 	vizsga
 		feleletválasztós
 			online vizsga esetén összefüggésekre, minimális gyakorlatias feladatok lesznek, kb 35 perc
@@ -27,6 +28,7 @@ számelm ea
 		ketteshez 12/30 kell
 
 nummód ea
+	12:15
 	Kovács Péter
 	https://numanal.inf.elte.hu/~kovi/
 	segédanyagok:
@@ -44,6 +46,7 @@ nummód ea
 	minden elõadásról felvétel
 
 szofftech
+	swap.web.elte.hu
 	félév végi teszt:
 		15bõl 10 kérdést kell megválaszolni
 		szofttech+progtech anyag kell kozni
@@ -99,6 +102,7 @@ telekom gyak
 	de teamsen írjunk (24 órán belül reply)
 	14:15
 	max 4 hiányzás
+	felvételt mi indíthatunk bármikor
 	Számonkérés:
 		Szocket zh (!! 50% elérés szükséges !!)
 			python, de ez csak másodlagos skill
@@ -112,6 +116,7 @@ telekom gyak
 				nem azonnal, kell neki idõ, ne utolsó percre hagyjuk!
 				(fõleg deadline utolsó óráiban meg van terhelve)
 				kódhasonlóságot nézik
+				Ha úgy gondoljuk, hogy valami formai dolgon bukik el a tesztelõ, lehet beszélni gyakvezzel
 			százalékos értékelés
 		pótzh van, gyakuv nincs
 		extra javítási lehetõségekrõl lehet beszélni
@@ -129,10 +134,15 @@ opre gyak
 		egy gyakorlat
 	Két beadandó, egymásra épülnek
 		második zhra kb teljesen felkészítenek
-		max 1 hét késés, azon felül nincs jegy!
+		max 1 hét késés, azon felül nincs jegy
 		határidõn belül akárhányszor be lehet adni
+		Nem kötelezõek külön-külön, de év végi kettes kell
 	van tantárgyi honlap, de canvas hivatalos
-	ajánlott könyv: tananbau könyv
+	ajánlott könyv: tanenbaum könyv
+
+telekom ea
+	lakis.web.elte.hu
+	ajánlott könyv: tanenbaum: computer networks
 
 adatb ea
 	0830
