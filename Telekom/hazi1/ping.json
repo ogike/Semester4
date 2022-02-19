@@ -2,25 +2,85 @@
     "date": "20220219",
     "system": "Windows",
     "pings": [
-        "\nPinging google.com [142.251.39.78] with 32 bytes of data:\nReply from 142.251.39.78: bytes=32 time=88ms TTL=58\nReply from 142.251.39.78: bytes=32 time=74ms TTL=58\nReply from 142.251.39.78: bytes=32 time=11ms TTL=58\nReply from 142.251.39.78: bytes=32 time=9ms TTL=58\nReply from 142.251.39.78: bytes=32 time=10ms TTL=58\nReply from 142.251.39.78: bytes=32 time=30ms TTL=58\nReply from 142.251.39.78: bytes=32 time=31ms TTL=58\nReply from 142.251.39.78: bytes=32 time=10ms TTL=58\nReply from 142.251.39.78: bytes=32 time=10ms TTL=58\nReply from 142.251.39.78: bytes=32 time=11ms TTL=58\n\nPing statistics for 142.251.39.78:\n    Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 9ms, Maximum = 88ms, Average = 28ms\n",
-        "\nPinging youtube.com [142.251.39.14] with 32 bytes of data:\nReply from 142.251.39.14: bytes=32 time=116ms TTL=58\nReply from 142.251.39.14: bytes=32 time=83ms TTL=58\nReply from 142.251.39.14: bytes=32 time=10ms TTL=58\nReply from 142.251.39.14: bytes=32 time=10ms TTL=58\nReply from 142.251.39.14: bytes=32 time=9ms TTL=58\nReply from 142.251.39.14: bytes=32 time=20ms TTL=58\nReply from 142.251.39.14: bytes=32 time=35ms TTL=58\nReply from 142.251.39.14: bytes=32 time=8ms TTL=58\nReply from 142.251.39.14: bytes=32 time=7ms TTL=58\nReply from 142.251.39.14: bytes=32 time=11ms TTL=58\n\nPing statistics for 142.251.39.14:\n    Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 7ms, Maximum = 116ms, Average = 30ms\n",
-        "\nPinging tmall.com [140.205.94.193] with 32 bytes of data:\nReply from 140.205.94.193: bytes=32 time=332ms TTL=92\nReply from 140.205.94.193: bytes=32 time=333ms TTL=92\nReply from 140.205.94.193: bytes=32 time=255ms TTL=92\nReply from 140.205.94.193: bytes=32 time=258ms TTL=92\nReply from 140.205.94.193: bytes=32 time=256ms TTL=92\nReply from 140.205.94.193: bytes=32 time=255ms TTL=92\nReply from 140.205.94.193: bytes=32 time=288ms TTL=92\nReply from 140.205.94.193: bytes=32 time=257ms TTL=92\nReply from 140.205.94.193: bytes=32 time=259ms TTL=92\nReply from 140.205.94.193: bytes=32 time=256ms TTL=92\n\nPing statistics for 140.205.94.193:\n    Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 255ms, Maximum = 333ms, Average = 274ms\n",
-        "\nPinging qq.com [203.205.254.157] with 32 bytes of data:\nReply from 203.205.254.157: bytes=32 time=405ms TTL=50\nReply from 203.205.254.157: bytes=32 time=356ms TTL=50\nReply from 203.205.254.157: bytes=32 time=275ms TTL=50\nReply from 203.205.254.157: bytes=32 time=278ms TTL=50\nReply from 203.205.254.157: bytes=32 time=276ms TTL=50\nReply from 203.205.254.157: bytes=32 time=277ms TTL=50\nReply from 203.205.254.157: bytes=32 time=316ms TTL=50\nReply from 203.205.254.157: bytes=32 time=276ms TTL=50\nReply from 203.205.254.157: bytes=32 time=280ms TTL=50\nReply from 203.205.254.157: bytes=32 time=279ms TTL=50\n\nPing statistics for 203.205.254.157:\n    Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 275ms, Maximum = 405ms, Average = 301ms\n",
-        "\nPinging sohu.com [123.125.116.28] with 32 bytes of data:\nReply from 123.125.116.28: bytes=32 time=296ms TTL=50\nReply from 123.125.116.28: bytes=32 time=293ms TTL=50\nReply from 123.125.116.28: bytes=32 time=231ms TTL=50\nReply from 123.125.116.28: bytes=32 time=231ms TTL=50\nReply from 123.125.116.28: bytes=32 time=229ms TTL=50\nReply from 123.125.116.28: bytes=32 time=231ms TTL=50\nReply from 123.125.116.28: bytes=32 time=259ms TTL=50\nReply from 123.125.116.28: bytes=32 time=230ms TTL=50\nReply from 123.125.116.28: bytes=32 time=230ms TTL=50\nReply from 123.125.116.28: bytes=32 time=229ms TTL=50\n\nPing statistics for 123.125.116.28:\n    Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 229ms, Maximum = 296ms, Average = 245ms\n",
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
+        {
+            "target": "google.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "youtube.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "tmall.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "qq.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "sohu.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "baidu.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "facebook.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "taobao.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "360.cn",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "jd.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "thedevguides.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "thegoldlooter.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "theteachat.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "totalgiftcard.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "trainingtechbase.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "uplatter.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "usstocksexchange.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "valoan.me",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "wildlifepestsolutions.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        },
+        {
+            "target": "yourhealthfromhome.com",
+            "output": "Access denied. Option -c requires administrative privileges.\n"
+        }
     ]
 }
