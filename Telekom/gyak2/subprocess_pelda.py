@@ -1,7 +1,7 @@
 import subprocess
 
 
-#                                             pipe-on keresztül menjen...?
+#                                             pipe-on keresztül menjen vissza ide(programunkba) az stdout
 p = subprocess.Popen(["echo", "hello world"], stdout=subprocess.PIPE, shell = True)
     # shell = true: vannak utasítások, amik önmagukban nem értelmezhetőek (pl dir)
     #               ha ez igaz, először egy shellt(cmdt) indít, majd azon belül hívja
