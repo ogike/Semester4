@@ -1,6 +1,7 @@
 számgráf gyak
 	Kiglics Máté
-	http://cg.elte.hu/index.php/grafika-bsc-gyakorlat-anyagok/
+	jelenlétiben gépteremben
+	http://cg.elte.hu/index.php. emel/grafika-bsc-gyakorlat-anyagok/
 	számonkérés: (oldalon fent van)
 		beadandók: meg kell védeni, minusz pont is lehet
 		órai munka: 
@@ -14,10 +15,13 @@ számgráf gyak
 	Hiányzások:
 		Kötelezõ jelenlét
 		Nézni fogja teamsen
+	mount: subst T: c:/
 
 opre ea
 	1600-1700
 		Lehet menni bármelyik elõadásra
+	Északi konferencia teremben
+	jelenlétiben is be kell lépni teamsbe(jelenlétellenõrzés)
 
 számelm ea
 	11:15
