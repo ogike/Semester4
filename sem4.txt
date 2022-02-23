@@ -34,6 +34,7 @@ számelm ea
 nummód ea
 	12:15
 	Kovács Péter
+	szinkron online és jelenlétu
 	https://numanal.inf.elte.hu/~kovi/
 	segédanyagok:
 		https://numanal.inf.elte.hu/~kovi/lecturenotes.html
@@ -73,6 +74,10 @@ számgráf ea
 számelm gyak
 	Mácskovity Máté, tegezés, teamsen írjunk
 	12:15?
+	full jelenléti
+		ha valaki beteg, és idõben jelezzük akkor aa4-tõl kezdõdõ hibrid orán is lehet
+		felvételek nem lesznek
+		konzultációt, segítséget nagyon szívesen
 	követelmények
 		két zh lesz
 			ha hibridben, akkor A/Bhez egy-egy jelenléti zht
