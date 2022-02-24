@@ -95,6 +95,7 @@ szofttech gyak
 nummód gyak
 	Bognár Gergõ
 	10:15
+	mostani hibrid mód
 	Két zh
 		ha valamelyik nem sikerül, akkor javító zhvan
 		ha kettõ nem sikerül, gyakuv
@@ -110,6 +111,7 @@ telekom gyak
 	email: cgsmef@inf.elte.hu
 	de teamsen írjunk (24 órán belül reply)
 	14:15
+	innentõl élõben is menni fognak gyakon
 	max 4 hiányzás
 	felvételt mi indíthatunk bármikor
 	Számonkérés:
@@ -129,11 +131,12 @@ telekom gyak
 			százalékos értékelés
 		pótzh van, gyakuv nincs
 		extra javítási lehetõségekrõl lehet beszélni
-		7 pluszpont = plusz 1 jegy?
+		7 pluszpont = plusz 1 jegy (!)
 		szorgalmikat teams dm-be fileként
 
 opre gyak
 	16:00-16:45
+	
 	Korom szilárd
 		Alapból teames emailen
 		Ha minden kötél szakad: korom.szilard@gmail.com

@@ -11,7 +11,13 @@ int main()
  int notacommonvalue=1;
  printf("The value is %i before forking \n",notacommonvalue);
  
+ //csinál egy copy-t a folyamatról  (és visszaadja a process azonosítóval)
+   //ez a process azonosító pozitív (tehát ha minusz akkor error)
+   //ha child, akkor 0 
  pid_t  child=fork(); //forks make a copy of variables
+ pid_t child2=fork(); //ez a child1-ben is forkolódik (összesen így lesz 4 process)
+                      //ha akarnám hogy csak 3 legyen, akkor a child > 0 ágban kell
+                        //zh-ban lehet rámennek erre!
  if (child<0){perror("The fork calling was not succesful\n"); exit(1);} 
  if (child>0) //the parent process, it can see the returning value of fork - the child variable!
  {
