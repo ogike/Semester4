@@ -10,10 +10,15 @@ out vec4 fs_out_col;
 //uniform változó: shader számára konstans
 	//értékét kívülről (CPU oldalról) kell megadni
 uniform float time;
+uniform float zoom;
+uniform float posXDiff;
+uniform float posYDiff;
+
+const float defXPos = 0.5f;
 
 //komplex számokra négyzetre emelés
 vec2 sq(vec2 a){
-	return vec2(a.x*a.x - a.y*a.y, 2*a.x*a.x);
+	return vec2(a.x*a.x - a.y*a.y,  2*a.x*a.y);
 }
 
 //csak simán tovább adjuk a vertex kimenetét
@@ -34,22 +39,25 @@ void main()
 		//vs_out_pos.xyzw = vs_out_pos.rgba
 	//if(distance(vec2(0), vs_out_pos.xy) < 1)//: körlap
 
+
 	float epsilon = 0.03;
 	float radius = abs(sin(time));
 	if(abs(distance(vec2(0), vs_out_pos.xy) - radius) < epsilon)
 		fs_out_col = vec4(1,0,0,1);
 		//legyenek a körön belüli pontok pirosak
 
+	//########################################################
 	//4. feladat: komplex számsík mandelbizbasz halmazzal
 	fs_out_col = vec4(1,0,0,1); //eddigi feladat felülfestése
 
 	//közelítés: 1/time-al szorozni
-	vec2 c = vs_out_pos.xy - vec2(0.5,0); //egésznek (orignónak) eltolása jobbra
+	vec2 c = (vs_out_pos.xy * (1/zoom)) - vec2(defXPos + posXDiff, posYDiff); //egésznek (orignónak) eltolása
 	vec2 x = vec2(0);
 	for(int i = 0; i < 100; ++i){
 		x = sq(x) + c;
 		if(length(x) > 2){ //ilyenkor tudjuk hogy nem korlátos lesz a fgv értéke
 			discard; //szóval el lehet dobni
+			break;
 		}
 	}
 	

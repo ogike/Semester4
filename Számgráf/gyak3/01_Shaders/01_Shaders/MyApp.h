@@ -32,5 +32,10 @@ public:
 protected:
 	// shaderekhez szükséges változók
 	GLuint m_programID = 0; // shaderek programja
+	float mouseZoom = 1;
+	float posXDiff = 0;
+	float posYDiff = 0;
+	float mouseDragSpeed = 0.01f;
+	bool isMouseDown = false;
 };
 
