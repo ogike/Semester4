@@ -63,8 +63,13 @@ adatb gyak
 		ez lesz az órai jelenlét
 		mindent amit az órán csináltunk, canvas feladatba fel kell tölteni
 	számonkérés: 2zh
+		jelenléti számonkérés
 		egyiket lehet javítani utolsó gyakon
 			itt a régi és az új jegy átlaga lesz a végleges jegy
+		két rész: (össz vissz 1,5h)
+			beugró (papíros?): 5 ppont
+			gépes kérdés: 5
+				új táblák
 
 számgráf ea
 	Bán Róbert

@@ -211,7 +211,7 @@ void CMyApp::Render()
 	GLuint locTime = glGetUniformLocation(m_programID, "time");
 	GLuint locCircle = glGetUniformLocation(m_programID, "circle");
 	glUniform1f(locTime, SDL_GetTicks() / 1000.f);
-	glUniform1f(locCircle, 1);
+	glUniform1i(locCircle, 1);
 
 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, 32); //
@@ -219,6 +219,8 @@ void CMyApp::Render()
 	// kirajzolás
 	//A draw hívásokhoz a VAO és a program bindolva kell legyenek (glUseProgram() és glBindVertexArray())
 	//glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	glUniform1i(locCircle, 0);
 
 
 	// kapcsoljuk be a VAO-t (a VBO jön vele együtt)

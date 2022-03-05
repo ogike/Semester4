@@ -35,6 +35,7 @@ while True:
     data = conn.recv(BUFFER_SIZE)
     if not data: #ha üres (eof karaktert kaptunk, ami megegyezésre kapcsolat bontást jelent)
 	    break
+    
     print("Üzenet:", data.decode()) #bytestring-et kapunk, tehát ezt visszakapjuk
     conn.send(reply)
 conn.close()

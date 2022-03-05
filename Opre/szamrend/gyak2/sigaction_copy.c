@@ -33,13 +33,14 @@ int main(){
   pid_t child=fork();
   if (child>0) 
   {
-    //ezek csak a szülő esetében töltődnek fel így!
     sigset_t sigset;
     sigfillset(&sigset); //milyen signal-okra NE reagáljon
     sigdelset(&sigset,SIGTERM); //kivegyük a blokkolt listából a SIGTERM-ET
     sigsuspend(&sigset);  
       // like pause() - except it waits only for signals not given in sigset
       //others will be blocked
+
+    kill(child, SIGUSR1);
 
     printf("The program comes back from suspending\n");
     int status;
