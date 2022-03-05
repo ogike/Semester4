@@ -6,7 +6,9 @@
 CMyApp::CMyApp(void)
 {
 	m_vaoID = 0;
-	m_vboID = 0;
+	m_vboID = 0; 
+	m_vaoID2 = 0;
+	m_vboID2 = 0;
 	m_programID = 0;
 }
 
@@ -84,19 +86,41 @@ bool CMyApp::Init()
 	glBindVertexArray(0); // feltöltüttük a VAO-t, kapcsoljuk le, ne módosítjuk véletlen se
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // feltöltöttük a VBO-t is, ezt is vegyük le
 
+	////////////////////////////////////////////////////////////
 	// ÚJ VBO BEVEZETÉSE KÖRHÖZ ////////////////////////////////
 	
-	const int N = 30;
+
+	// SIMA KÖRLAP:
+	//const int N = 30;
+	//const float r = 0.4;
+	//Vertex circle[N + 2]; //csúcsok + középpont + záró pont
+	//circle[0] = { glm::vec3(0,0,0), glm::vec3(1,0,1) };
+
+	//for (int i = 0; i < N + 2; i++) {
+	//	float phi = 2 * M_PI / N * i; //az éppeni háromszöghöz a szög
+	//	circle[i] = { r * glm::vec3( cosf(phi), sinf(phi) * 4/3, -0.1 ),
+	//					glm::vec3(1,0,1) };
+	//		//4/3: hogy default képarányban tényleg kör legyen
+	//}
+
+	// SZORGALMI: KÖR GYŰRŰ
+	const int N = 60;
 	const float r = 0.4;
+	const float ringWidth = 0.1;
 
-	Vertex circle[N + 2]; //csúcsok + középpont + záró pont
-	circle[0] = { glm::vec3(0,0,0), glm::vec3(1,0,1) };
+	Vertex circle[N + 2]; //belső csúcsok + külső csúcsok + kezdő + záró pont
+	bool isOuter = false;
 
-	for (int i = 0; i < N + 2; i++) {
+	for (int i = 0; i < N + 2 ; i++) {
 		float phi = 2 * M_PI / N * i; //az éppeni háromszöghöz a szög
-		circle[i] = { r * glm::vec3( cosf(phi), sinf(phi) * 4/3, -0.1 ),
+		float x = cosf(phi);
+		float y = sinf(phi) * 4/3; //TODO: dynamic képarány
+		float curR = isOuter ? r + ringWidth : r;
+		circle[i] = { curR * glm::vec3( x, y, -0.1 ),
 						glm::vec3(1,0,1) };
-			//4/3: hogy default képarányban tényleg kör legyen
+
+		isOuter = !isOuter;
+
 	}
 
 
@@ -206,7 +230,7 @@ void CMyApp::Render()
 	// shader bekapcsolása, ebben a projektben a teljes programot jelöli, hisz nem váltunk a shaderek között
 	glUseProgram( m_programID );
 
-	glBindVertexArray(m_vaoID2);
+	glBindVertexArray(m_vaoID2); //circle vao
 
 	GLuint locTime = glGetUniformLocation(m_programID, "time");
 	GLuint locCircle = glGetUniformLocation(m_programID, "circle");
@@ -214,7 +238,7 @@ void CMyApp::Render()
 	glUniform1i(locCircle, 1);
 
 
-	glDrawArrays(GL_TRIANGLE_FAN, 0, 32); //
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 62); //kör gyűrú
 
 	// kirajzolás
 	//A draw hívásokhoz a VAO és a program bindolva kell legyenek (glUseProgram() és glBindVertexArray())
@@ -224,7 +248,7 @@ void CMyApp::Render()
 
 
 	// kapcsoljuk be a VAO-t (a VBO jön vele együtt)
-	glBindVertexArray(m_vaoID);
+	glBindVertexArray(m_vaoID); //háttér vao
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
