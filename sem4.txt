@@ -57,6 +57,9 @@ szofftech
 		szofttech+progtech anyag kell kozni
 
 adatb gyak
+	sql tunnel:
+		ssh -L 2001:aramis.inf.elte.hu:1521 tasizoli@caesar.elte.hu
+		watch -n 1 echo "SSH WORKS"
 	Vörös Péter, tegezés
 	08:30
 	minden órán lesz feladat amit be kell adni
