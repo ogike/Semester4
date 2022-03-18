@@ -193,7 +193,7 @@ void CMyApp::Render()
 	//						        eltolva az [1, 1, 0] vektorral
 	float t = SDL_GetTicks() / 1000.f; //1 second
 	m_matWorld = glm::translate(glm::vec3(1, 1, 0));
-	m_matWorld *= glm::rotate<float>(2 * M_PI * 2 * t, glm::vec3(1,0,0)); // (radiánban!! fok, melyik tengely körül)
+	m_matWorld *= glm::rotate<float>(2 * M_PI * 2 * t / 8, glm::vec3(1,1,0)); // (radiánban!! fok, melyik tengely körül)
 	m_matWorld *= glm::scale(glm::vec3(2, -2, 1)); //NOTE: ez megváltoztatja a vertex bejárás irányt -> előlap/hátlap!
 	//glCullFace(GL_FRONT);
 
