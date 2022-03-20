@@ -23,11 +23,11 @@ lower = 1
 
 playing = True
 while playing:
-    if(lower != upper):
+    if(lower < upper):
         dir = random.choice(possible_dirs)
         guess = int( (upper+lower) / 2 ) #the middle
         print("Lower is ", lower, ", upper is ", upper, ', guess: ', guess, ', dir: ', dir)
-    else: #if we know the number
+    else: #if we know the number OR they have intersected
         dir = '='
         guess = lower
         print("Lower and upper is ", lower, ", going for it!")

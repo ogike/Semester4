@@ -31,6 +31,7 @@ def evaluate_guess(dir : str, guess : int, num : int) -> str:
 server_addr = sys.argv[1]
 server_port = int( sys.argv[2] )
 NUM_OF_CLIENTS = 10
+    
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -41,6 +42,8 @@ sock.listen(NUM_OF_CLIENTS)
 packer = struct.Struct('c i')
 
 rand_num = random.randint(1, 100)
+if( len(sys.argv) > 3 ):
+    rand_num = int( sys.argv[3] )
 print("Random number is: ", rand_num)
 
 inputs = [ sock ]
@@ -52,10 +55,13 @@ while active:
         readables, _, _ = select.select( inputs, [], [], 1 )
 
         if(playing == False and len(inputs) <= 1):
-            print("Evereyone disconnected, new game starting!")
-            rand_num = random.randint(1, 100)
-            print("Random number is: ", rand_num)
-            playing = True
+            # print("Evereyone disconnected, new game starting!")
+            # rand_num = random.randint(1, 100)
+            # print("Random number is: ", rand_num)
+            # playing = True
+            print("Evereyone disconnected, closing server!")
+            active = False
+            break
             
 
         for s in readables:
@@ -79,6 +85,7 @@ while active:
                 msg_dir = msg_unpacked[0].decode()
                 msg_guess = msg_unpacked[1]
                 print( "A kliens uzenete: %c %d" % (msg_dir, msg_guess) )
+                print("readable: ", s)
                 
                 result : str
                 if (playing):
