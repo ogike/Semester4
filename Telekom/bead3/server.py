@@ -13,13 +13,13 @@ def evaluate_guess(dir : str, guess : int, num : int) -> str:
         else:
             return 'K'
 
-    elif(dir == '<'):
+    elif(dir == '>'):
         if(guess < num):
             return 'I'
         else:
             return 'N'
 
-    elif(dir == '>'):
+    elif(dir == '<'):
         if(guess > num):
             return 'I'
         else:
@@ -84,9 +84,7 @@ while active:
                 msg_unpacked = packer.unpack(msg)
                 msg_dir = msg_unpacked[0].decode()
                 msg_guess = msg_unpacked[1]
-                print( "A kliens uzenete: %c %d" % (msg_dir, msg_guess) )
-                print("readable: ", s)
-                
+                print( "A %s kliens uzenete: %c %d" % (s.getpeername(), msg_dir, msg_guess) )                
                 result : str
                 if (playing):
                     result = evaluate_guess(msg_dir, msg_guess, rand_num)

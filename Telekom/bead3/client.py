@@ -49,12 +49,12 @@ while playing:
         playing = False
         break
     elif(msg_in_unpacked == 'I'):
-        if(dir == '<'):
+        if(dir == '>'):
             lower = guess + 1
         else:
             upper = guess - 1
     elif(msg_in_unpacked == 'N'):
-        if(dir == '<'):
+        if(dir == '>'):
             upper = guess
         else:
             lower = guess
