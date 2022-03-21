@@ -33,7 +33,7 @@ glm::vec3 CMyApp::GetSpherePos(float u, float v)
 	u *= 2 * 3.1415f;
 	v *= 2 * 3.1415f;
 
-	float r = 1;
+	float r = 0.75f;
 	float R = 4;
 
 	return glm::vec3( ( R + r*cos(u) )*cos(v),
@@ -227,6 +227,8 @@ void CMyApp::Render()
 		glm::scale<float>( glm::vec3(s_x, s_y, s_z) ) <- léptékezés
 
 	*/
+
+	//első alakzat transzformációja
 	m_matWorld = glm::mat4(1); //első legyen origóban
 	glm::mat4 mvp = m_matProj * m_matView * m_matWorld;
 
@@ -240,7 +242,6 @@ void CMyApp::Render()
 	// kapcsoljuk be a VAO-t (a VBO jön vele együtt)
 	glBindVertexArray(m_vaoID);
 
-	// NEW //////////////////////////////////
 	// kirajzolás
 	//A draw hívásokhoz a VAO és a program bindolva kell legyenek (glUseProgram() és glBindVertexArray())
 
@@ -249,23 +250,24 @@ void CMyApp::Render()
 					GL_UNSIGNED_SHORT,	// indexek tipusa
 					0);					// indexek cime
 
-	//második gömb
+	//második alakzat
 	//forgassuk meg!
 	float t = SDL_GetTicks() / 1000.f;
-	glm::mat4 tr = glm::rotate<float>(t, glm::vec3(0, 1, 0)) * glm::translate(glm::vec3(4, 0, 0));
+	glm::mat4 first_arc = glm::rotate<float>(t, glm::vec3(0, 1, 0)) * glm::translate(glm::vec3(4, 0, 0));
 
-	m_matWorld =  tr * glm::scale(glm::vec3(0.5, 0.5, 0.5));
+	m_matWorld = first_arc
+		* glm::rotate<float>( glm::radians(90.f), glm::vec3(1, 0, 0))
+		* glm::scale(glm::vec3(0.5, 0.5, 0.5));
 	mvp = m_matProj * m_matView * m_matWorld;
 	glUniformMatrix4fv(m_loc_mvp, 1, GL_FALSE, &(mvp[0][0]));
 
 	glDrawElements(GL_TRIANGLES, 3 * 2 * (N) * (M), GL_UNSIGNED_SHORT, 0);
 
-	//harmadik gömb
-	
+	//harmadik alakzat
+	glm::mat4 second_arc = glm::rotate<float>(2*t, glm::vec3(0, 0, 1))
+		* glm::translate(glm::vec3(2, 0, 0));
 
-	m_matWorld = tr
-		* glm::rotate<float>(-2 * t, glm::vec3(0, 1, 0))
-		* glm::translate(glm::vec3(2, 0, 0))
+	m_matWorld = first_arc * second_arc
 		* glm::scale(glm::vec3(0.25, 0.25, 0.25));
 	mvp = m_matProj * m_matView * m_matWorld;
 	glUniformMatrix4fv(m_loc_mvp, 1, GL_FALSE, &(mvp[0][0]));
