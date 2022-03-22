@@ -15,14 +15,15 @@ int main(int argc, char *argv[])
     // csővezeték létrehozása
     //  paraméter: kettő elemű tömb (kettő file descriptor = szám)
         //fd: minden egyes folyamathoz tartozik egy fd
-        //gyakorlatilag file, ami számmal van jelölve
-        //két fd: egyik írásra, másik olvasásra
+            //gyakorlatilag file, ami számmal van jelölve
+        //két fd: [read, write]
         // => ugyan azt a write()-ot tudjuk használni process-ek közötti kommunkiációra, mint fileoknál
     if (pipe(pipefd) == -1)
     {
         perror("Hiba a pipe nyitaskor!");
         exit(EXIT_FAILURE);
     }
+
     pid = fork(); // creating parent-child processes
     if (pid == -1)
     {
@@ -31,20 +32,21 @@ int main(int argc, char *argv[])
     }
 
     if (pid == 0)
-    {                     // child process
+    {                     // child process, ami olvas
         sleep(3);         // sleeping a few seconds, not necessary
         close(pipefd[1]); // Usually we close the unused write end
                             //szokás, mivel nem fogunk írni
 
         int length = -1 ; //TODO: test
-        read(pipefd[0], &length, sizeof(int)); // reading max 100 chars
+        read(pipefd[0], &length, sizeof(int)); // reading 1 char for length
+        printf("Gyerek kiolvassa az adat meretet: %d\n", length);
         
 
         printf("Gyerek elkezdi olvasni a csobol az adatokat!\n");
         read(pipefd[0], sz, length); // reading max 100 chars
         printf("Gyerek olvasta uzenet: %s\n", sz);
 
-        printf("Gyerek elkezdi olvasni a csobol az adatokat!\n");
+        printf("Gyerek elkezdi másodszorra olvasni a csobol az adatokat!\n");
         read(pipefd[0], sz, sizeof(sz)); // reading max 100 chars
         printf("Gyerek olvasta uzenet: %s\n", sz);
 
@@ -58,7 +60,7 @@ int main(int argc, char *argv[])
                             //szokás, mivel nem fogunk olvasni
 
         int msgLength = strlen("Hajra Fradi!") + 1;
-        write(pipefd[0], &msgLength, sizeof(int));
+        write(pipefd[1], &msgLength, sizeof(int));
 
         write(pipefd[1], "Hajra Fradi!", msgLength);
         write(pipefd[1], "Hajra Fradi2!", 14); //ez már 14 hosszú lenne, vége nem megy át
@@ -67,7 +69,7 @@ int main(int argc, char *argv[])
         fflush(NULL); // flushes all write buffers (not necessary)
         wait(NULL);   // waiting for child process (not necessary)
                       // try it without wait()
-        printf("Szulo befejezte!");
+        printf("Szulo befejezte!\n");
     }
     exit(EXIT_SUCCESS); // force exit, not necessary
 }

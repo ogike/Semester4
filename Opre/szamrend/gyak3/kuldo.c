@@ -11,15 +11,15 @@ int int_read()
     int number = -1;
 
     printf("Kérek egy számot!: ");
-    int result = scanf(&number);
+    int result = scanf("%d", &number);
 
     if (result == 0)
     {
-        printf("Sikertelen");
+        printf("Sikertelen olvasas\n");
     }
     else
     {
-        printf("Sikeres");
+        printf("Sikeres iras\n");
     }
 
     // sorvégi karakterek eldobása
@@ -35,7 +35,8 @@ int main()
     printf("Fifo start!\n");
     char pipename[20];
 
-    sprintf(pipename, "/tmp/HM37UQ_nevcso");
+    //neki getpid..?
+    sprintf(pipename, "/tmp/HM37UQ_nevcso", getpid());
 
     //neki nincs mkfifo!!!
     //int fid = mkfifo(pipename, S_IRUSR | S_IWUSR); // creating named pipe file
@@ -43,21 +44,16 @@ int main()
     // the file name: fifo.ftc
     // the real fifo.ftc permission is: mode & ~umask
 
-    if (fid == -1)
+    int number = -1;
+    fd = open(pipename, O_WRONLY);
+    while(number != 0)
     {
-        printf("Error number: %i", errno);
-        perror("Gaz van:");
-        exit(EXIT_FAILURE);
+        number = int_read();
+        write(fd, &number, sizeof(int));
+        printf("Gyerek vagyok, beirtam a következő számot!: %d\n", number);
     }
     printf("Mkfifo vege!\n");
 
-
-    printf("Gyerek vagyok, irok a csobe!\n");
-    printf("Csonyitas eredmenye: %d!\n", fid);
-    fd = open(pipename, O_WRONLY);
-    write(fd, "Hajra Fradi!\n", 12);
-
-
     close(fd);
-    printf("Gyerek vagyok, beirtam, vegeztem!\n");
+    return 0;
 }

@@ -28,20 +28,18 @@ int main()
         exit(EXIT_FAILURE);
     }
     printf("Mkfifo vege!\n");
-
-    char s[1024] = "Semmi";
     printf("Csonyitas eredmenye szuloben: %d!\n", fid);
     fd = open(pipename, O_RDONLY);
 
     int number = -1;
-    //do
+    while(number != 0)
     {
-        read(fd, s, sizeof(s));
-        printf("Ezt olvastam a csobol: %s \n", s);
-    } //while (/* condition */);
-    
+        read(fd,  &number, sizeof(int));
+        printf("Ezt olvastam a csobol: %d \n", number);
+    }
+    printf("0-t olvastam, program vége.")
 
     close(fd);
-    // remove fifo.ftc
-    unlink(pipename);
+    unlink(pipename); // remove fifo.ftc
+    return 0;
 }
