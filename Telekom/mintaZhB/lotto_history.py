@@ -1,3 +1,16 @@
+# FELADAT ###############
+# Készíts egy lottóalkalmazást, ahol a szerver generál 5 számot 1 és 20 között (csak hogy legyen esély
+# nyerni). Ezek lesznek a lottószámok. A kliensek beküldik a tippjeiket, illetve hogy mennyi pénzt
+# raknak fel a szelvényre. A server megmondja, hogy mik voltak a nyerőszámok, es hogy mennyit nyert
+# az adott játékos. 1 találat 1x, 2 találat 2x, 3 találat 3x, stb.
+
+# 1/A: Old meg a feladatot UDP felett
+# 2/B: Az üzenet formátuma bytes legyen ':' szeparátorral!
+# 3:   A szerverre egyszerre tudjon több kliens is csatlakozni! (TCP-nél selecttel)
+# 4/D: A kliens a tippeket json fájlból olvassa be!
+# 5/A: history külön szerverként, aminek tcp-vel küld a szerver
+
+from array import array
 import sys
 import socket
 import struct
@@ -6,10 +19,8 @@ import json
 
 ## SETTING UP SOCKETS ######################################X
 
-proxy_addr = sys.argv[1] # "szerverként" mi a címünk
-proxy_port = int(sys.argv[2])
-server_addr = sys.argv[3] # igazi szerver címe
-server_port = int(sys.argv[4])
+proxy_addr = "localhost" # "szerverként" mi a címünk
+proxy_port = 10001
 
 # szerverként socket (kliens TCP-s kapcsolata)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -17,22 +28,42 @@ sock.bind( (proxy_addr, proxy_port) )
 
 sock.listen(5)
 
-#kliensként socket (igazi szerver felé UDP-s kapcsolat)
-proxySock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-print("Trying to connect to server...")
-proxySock.connect( (server_addr, server_port))
-print("Connected to server")
+BUFFER_SIZE : int = 1024
 
+## WRITING TO JSON ######################################X
+filename = "history.json" 
 
-## PACKERS ######################################X
+def writeGuessesToJson(guesses : array, reward : int, client_name: str):
+    print("writing history to ", filename)
+    try:
+        file_data = []
+        #TODO: handling file doesnt exist
+        with open(filename, "r") as file:
+            file_data = json.load(file)
 
-packer_in = struct.Struct('5i i') #[5 guesses, bet]
-packer_out = struct.Struct('i') #how much we won
+        data_to_write = {
+            client_name  : {
+                "guesses" : guesses,
+                "amount_won" : reward
+            }
+        }
+
+        file_data["client_sessions"].append(data_to_write)
+        print(file_data)
+
+        with open(filename, "w") as file:
+            json.dump(file_data, file, indent = 4)
+
+    except Exception as e:
+        print("Exception occured while writing to file.")
+        print (e)
+
 
 ## SERVING CLIENTS ######################################X
 
-print("Waiting for clients...")
+print("Waiting for server...")
 
+#Note: i know its overengineering to handle multiple clients, but i already wrote this so its less work
 inputs = [ sock ]
 while True:
     try:
@@ -41,11 +72,11 @@ while True:
         for s in readables:
             if s is sock: # new client connecting
                 connection, client_info = sock.accept()
-                print("Csatlakozott valaki: %s:%d" % client_info )
+                print("Csatlakozott egy szerver: %s:%d" % client_info )
                 inputs.append(connection)
 
             else: #already established connection
-                msg = s.recv(packer_in.size)
+                msg = s.recv(BUFFER_SIZE)
                 if not msg: # client closed connection
                     s.close()
                     print("A kliens lezárta a kapcsolatot")
@@ -53,53 +84,10 @@ while True:
                     continue
 
                 ## HANDLING MSG ################################X
-                parsed_msg = packer_in.unpack(msg) # [5 guesses, bet]
+                parsed_msg = msg.decode().split(":") # [5 guesses, reward, client_name]
                 print("A client sent msg: ", parsed_msg)
 
-
-                ## FORWARDING MSG ################################X
-                proxySock.sendall(msg)
-                
-                ## GETTING REPLY ################################X
-                try:
-                    msg_in = proxySock.recv(packer_in.size)
-                    msg_in_parsed = packer_out.unpack(msg_in)
-
-                    ## STORING CLIENT HISTORY ################################X
-                    filename = "history.json" 
-                    print("writing history to ", filename)
-                    try:
-                        file_data = []
-                        #TODO: handling file doesnt exist
-                        with open(filename, "r") as file:
-                            file_data = json.load(file)
-
-                        client_name = s.getpeername()[0] + str(s.getpeername()[1])
-                        data_to_write = {
-                            client_name  : {
-                                "guesses" : parsed_msg[:-1],
-                                "amount_won" : msg_in_parsed[0]
-                            }
-                        }
-
-                        file_data["client_sessions"].append(data_to_write)
-                        print(file_data)
-
-                        with open(filename, "w") as file:
-                            json.dump(file_data, file, indent = 4)
-
-                    except Exception as e:
-                        print("Exception occured while writing to file.")
-                        print (e)
-                    
-                    ## SENDING BACVK REPLY ################################X
-
-                    print("Sending this back to client: ", msg_in)
-                    s.sendall(msg_in)
-                except Exception as e:
-                    print("Exception occured while receiving reply")
-                    print(e)
-                    continue
+                writeGuessesToJson(parsed_msg[0:5], parsed_msg[5], parsed_msg[6])
 
     except KeyboardInterrupt: #ctrl-c event
         for s in inputs:

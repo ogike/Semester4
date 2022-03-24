@@ -8,10 +8,10 @@ BUFFER_SIZE = 1024
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-coordX = int(input())
-coordY = int(input())
-hour   = int(input())
-min    = int(input())
+coordX = int(input("Koord x"))
+coordY = int(input("Koord y"))
+hour   = int(input("hour"))
+min    = int(input("min"))
 to_send_values = (coordX, coordY, hour, min, "HM37UQ".encode())
 
 packer_out = struct.Struct('4i 6s')

@@ -4,11 +4,11 @@
 # raknak fel a szelvényre. A server megmondja, hogy mik voltak a nyerőszámok, es hogy mennyit nyert
 # az adott játékos. 1 találat 1x, 2 találat 2x, 3 találat 3x, stb.
 
-# 1/A: Old meg a feladatot TCP felett
-# 2/B: Az üzenet formátuma struct legyen, es legálabb 2 mező legyen benne
+# 1/A: Old meg a feladatot UDP felett
+# 2/B: Az üzenet formátuma bytes legyen ':' szeparátorral!
 # 3:   A szerverre egyszerre tudjon több kliens is csatlakozni! (TCP-nél selecttel)
-# 4/D: A kliens a tippeket parancssori argumentumkent kapja
-# 5/b: history külön szerverként, szerver hívja 
+# 4/D: A kliens a tippeket json fájlból olvassa be!
+# 5/A: history külön szerverként, aminek tcp-vel küld a szerver
 
 import sys
 import socket
@@ -19,13 +19,20 @@ import select
 BUFFER_SIZE : int = 1024
 
 ## CREATING SERVER SOCKET ###############################X
-server_addr = sys.argv[1]
-server_port = int( sys.argv[2] )
+server_addr = "localhost"
+server_port = 10000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind( (server_addr, server_port) )
 sock.setblocking(0) # making keyboardinterrupt possible
 sock.settimeout(1)
+
+## CONNECTING TO HISTORY SERVER
+history_addr = "localhost"
+history_port = 10001
+
+history_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+history_sock.connect((history_addr, history_port))
 
 ## GENERATING DATA ######################################X
 
@@ -61,11 +68,18 @@ while True:
                 
         result = int(parsed_msg[5]) * correct_guesses
 
-        ## SENDING REPLY ################################X
 
+        ## SENDING REPLY ################################X
         msg_out = str(result).encode()
         sock.sendto(msg_out, client_addr)
         print("Sent reply: ", msg_out)
+
+        ## SENDING TO HISTORY SERVER ################################X
+        history_msg = list( map(str, parsed_msg[0:5]) )
+        history_msg.append( str(result) )
+        history_msg.append( str(client_addr))
+        history_msg = ":".join(history_msg)
+        history_sock.sendall(history_msg.encode())
         
     except KeyboardInterrupt:
         break

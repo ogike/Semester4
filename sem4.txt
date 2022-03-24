@@ -70,9 +70,10 @@ adatb gyak
 		egyiket lehet javítani utolsó gyakon
 			itt a régi és az új jegy átlaga lesz a végleges jegy
 		két rész: (össz vissz 1,5h)
-			beugró (papíros?): 5 ppont
+			beugró (papíros?): 5 feladat, kb 30 perc
 			gépes kérdés: 5
 				új táblák
+				akár google-ezni lehet
 
 számgráf ea
 	Bán Róbert

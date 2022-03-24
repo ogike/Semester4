@@ -10,6 +10,7 @@
 # 4/D: A kliens a tippeket json fájlból olvassa be!
 # 5/A: history külön szerverként, aminek tcp-vel küld a szerver
 
+import json
 import sys
 import socket
 import random
@@ -28,12 +29,20 @@ sock.connect((server_addr, server_port))
 
 ## GETTING DATA ######################################X
 
-guesses : int = []
-bet : int = 0
+if(len( sys.argv ) < 1):
+    print("No filename gaven as parameter!")
+    exit
+filename = sys.argv[1]
 
-for i in range(0, 5):
-    guesses.append( sys.argv[i+1] ) 
-bet = sys.argv[6]
+guesses : int = [2,4,6,8,10]
+bet : int = 5
+
+with open(filename, "r") as guess_file:
+    guess_data = json.load(guess_file)
+    guesses = guess_data["guesses"]
+    guesses = list( map(str, guesses) )
+    bet = str( guess_data["bet"] )
+    print("test: ", type( guesses[0] ), guesses[0])
 
 ## SENDING ######################################X
 
