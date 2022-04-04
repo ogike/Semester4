@@ -1,4 +1,5 @@
-//-lrt kapcsoló
+//NOTE: -lrt kapcsoló fordításhoz kell
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
