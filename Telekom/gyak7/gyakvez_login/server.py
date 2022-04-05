@@ -63,9 +63,9 @@ try:
                 else:
                     credentials[username] = password_hash
                     answ = "CREATED"
-                    #TODO: writing to file?
                 s.sendall(answ.encode())
                 print("Elküldött válasz:", answ)
 
 finally:
     sock.close()
+    #TODO: write modified creds to file
