@@ -4,6 +4,7 @@
 
 #define BUFFER_SIZE 99
 #define FILE_NAME "data.txt"
+#define FILE_NAME_TEMP "data_temp.txt"
 
 #define NUM_OF_TERRITORIES 7
 const char validTerritories[][BUFFER_SIZE] = {
@@ -13,12 +14,11 @@ const char validTerritories[][BUFFER_SIZE] = {
 
 void newPerson();
 void modifyPerson();
-void deletePerson();
+int deletePerson();
 void listPeople();
 
 void chooseTerritory(char chosen[]); //handles territory validity
-int contains(char* key, char** set, int setNum);
-int searchLine(); //???
+int isValidTerritory(char* terr);
 void exitProgram();
 
 FILE *fp;
@@ -34,18 +34,19 @@ int main(void){
         exit(1);
     }
 
+    const char menuPrompt[] = "Choose a menu option (add: a, list: l, modify: m, delete: d, exit: x): ";
+
     //menu system
-    printf("Choose a menu option (add: a, list: l, exit: x): ");
+    printf(menuPrompt);
     while( fgets(menuString, BUFFER_SIZE, stdin) != NULL ){
 
         if(strlen(menuString) < 2){
             //if reading string with only \n
-            //TODO: why is this buggy?
             continue;
         }
 
         if(strlen(menuString) != 2){ //curMenu can only be 1 char long
-            fprintf(stderr, "Menu option (%s) can only be 1 character long.", menuString);
+            fprintf(stderr, "Menu option (%s) can only be 1 character long.\n", menuString);
         }
 
         else {
@@ -56,26 +57,35 @@ int main(void){
             case 'a':
                 printf("Adding new person:\n");
                 newPerson();
-                break;
-            
+                break;          
             case 'l':
                 printf("Listing people...\n");
                 listPeople();
+                break;          
+            case 'd':
+                printf("Deleting person...\n");
+                printf("Enter the name of the person to be deleted: ");
+                char toDelete[BUFFER_SIZE];
+                fgets(toDelete, BUFFER_SIZE, stdin);
+                toDelete[strcspn(toDelete, "\r\n")] = 0;
+
+                deletePerson(toDelete);
+                break;  
+            case 'm':
+                printf("Modifying a person...\n");
+                modifyPerson();
                 break;
-            
             case 'x':
                 printf("Exiting program... \n");
                 exitProgram();
                 break;
-
             default:
                 fprintf(stderr,"Invalid menu option\n");
                 break;
             }
-
         }
 
-        printf("Choose a menu option (add: a, list: l, exit: x): ");
+        printf(menuPrompt);
     }
     printf("At the end of the program... \n");
     exitProgram();
@@ -86,6 +96,7 @@ void newPerson(){
 
     char personName[BUFFER_SIZE];
     char personTerritory[BUFFER_SIZE];
+    char buffer[BUFFER_SIZE];
     int personTryNum;
 
     printf("\tName: ");
@@ -95,18 +106,98 @@ void newPerson(){
 
     printf("\tTerritory: ");
     chooseTerritory(personTerritory); //gets a valid territory from stdin into personTerritory
-    // fgets(personTerritory, BUFFER_SIZE, stdin);
-    // personTerritory[strcspn(personTerritory, "\r\n")] = 0; 
 
     printf("\tNumber of this try:");
-    //TODO: not good with txt input
-    scanf("%d", &personTryNum);
+    personTryNum = atoi( fgets(buffer, BUFFER_SIZE, stdin) );
+    while(personTryNum == 0){
+        fprintf(stderr, "Invalid try number, must be positive integer.\n");
+        printf("\tNumber of this try:");
+        personTryNum = atoi( fgets(buffer, BUFFER_SIZE, stdin) );
+    }
 
     printf("Adding to database...\n");
     fseek(fp, 0, SEEK_END); //set the cursor to the end of the file
-    // printf("\tseek done\n");
     fprintf(fp, "%s|%s|%d\n", personName, personTerritory, personTryNum);
-    // printf("\twriting done\n");
+
+    return;
+}
+
+//return 1: error/didnt find the person to delete
+int deletePerson(char toDelete[]){
+    FILE *ftemp = fopen(FILE_NAME_TEMP, "w");
+    if(ftemp == NULL){
+        fprintf(stderr, "Cant open temporary file for removing!");
+        return 1;
+    }
+
+    char buffer[BUFFER_SIZE];
+    char * curName;
+
+
+    fseek(fp, 0, SEEK_SET);
+    int searching = 1;
+    int curLine = 0;
+    while(fgets(buffer, BUFFER_SIZE, fp) != NULL){
+        char original[BUFFER_SIZE];
+        strcpy(original, buffer);
+
+        curName = strtok(buffer, "|");
+
+        if( strcmp(curName, toDelete) == 0 ){
+            //printf("debug Found person at line %d\n!", curLine);
+            searching = 0;
+            //skip writing
+        } else{
+            fprintf(ftemp, original);
+        }
+        curLine++;
+    }
+
+    if(searching == 1){
+        fprintf(stderr, "Person with name (%s) not found!\n", toDelete);
+        fclose(ftemp);
+        return 1;
+    } else{ //if we found and removed the searched person
+        fclose(fp);
+        fclose(ftemp);
+
+        remove(FILE_NAME);
+        rename(FILE_NAME_TEMP, FILE_NAME);
+
+        fp = fopen(FILE_NAME, "r+");
+        return 0;
+    }
+}
+
+void modifyPerson(){
+    printf("Enter the name of the person to be modified: ");
+    char toModName[BUFFER_SIZE];
+    fgets(toModName, BUFFER_SIZE, stdin);
+    toModName[strcspn(toModName, "\r\n")] = 0;
+
+    if( deletePerson(toModName) == 1 ){
+        fprintf(stderr, "Couldnt find person to modify!\n");
+        return;
+    }
+
+    char personTerritory[BUFFER_SIZE];
+    char buffer[BUFFER_SIZE];
+    int personTryNum;
+
+    printf("\tNew territory: ");
+    chooseTerritory(personTerritory); //gets a valid territory from stdin into personTerritory
+
+    printf("\tNew number for this try:");
+    personTryNum = atoi( fgets(buffer, BUFFER_SIZE, stdin) );
+    while(personTryNum == 0){
+        fprintf(stderr, "Invalid try number, must be positive integer.\n");
+        printf("\tNumber of this try:");
+        personTryNum = atoi( fgets(buffer, BUFFER_SIZE, stdin) );
+    }
+
+    printf("Adding to database...\n");
+    fseek(fp, 0, SEEK_END); //set the cursor to the end of the file
+    fprintf(fp, "%s|%s|%d\n", toModName, personTerritory, personTryNum);
 
     return;
 }
@@ -118,6 +209,7 @@ void listPeople(){
     printf("List all the people or only a territory (a/t): ");
     while(listAll == -1){ 
         if( fgets(buffer, BUFFER_SIZE, stdin) != NULL){
+            buffer[strcspn(buffer, "\r\n")] = 0; //strip newline 
             if(strcmp(buffer, "a") == 0){
                 listAll = 1;
             } else if(strcmp(buffer, "t") == 0){
@@ -127,8 +219,7 @@ void listPeople(){
                 chooseTerritory(territoryToList);
 
             } else{
-                //TODO: gets stuck here 
-                fprintf(stderr, "Not a valid option given, write 'a' or 't': ");
+                fprintf(stderr, "Not a valid option given (%s), write 'a' or 't': ", buffer);
             }
         }
     }
@@ -139,12 +230,18 @@ void listPeople(){
             printf(buffer);
         } else{
             //get the second part of the line - the territory
+            char original[BUFFER_SIZE];
+            strcpy(original, buffer);
             char * territoryCur;
             territoryCur = strtok(buffer, "|");
-            territoryCur = strtok(NULL, "|");
+            territoryCur = strtok(NULL, "|");   
+            if(territoryCur == NULL){
+                fprintf(stderr, "Wrong format in data file!");
+                continue;
+            }         
 
-            if( contains(territoryCur, validTerritories, NUM_OF_TERRITORIES) == 1 ){
-                printf(buffer);
+            if( strcmp(territoryCur, territoryToList) == 0 ){
+                printf(original);
             }
         }
     }
@@ -156,7 +253,7 @@ void chooseTerritory(char chosen[]){
 
     while (isCorrect == 0){
         if( fgets(chosen, BUFFER_SIZE, stdin) != NULL ){
-            isCorrect = contains(chosen, validTerritories, NUM_OF_TERRITORIES);
+            isCorrect = isValidTerritory(chosen);
 
             // chosen[strcspn(chosen, "\r\n")] = 0; //strip newline 
             // for(int i = 0; i < len && isCorrect == 0; i++){
@@ -178,14 +275,18 @@ void chooseTerritory(char chosen[]){
     } 
 }
 
-//return 1 if key is in the list of strings(set)
-//ignores trailing newline on key
-int contains(char* key, char** set, int setNum){
+//return 1 if terr is in the list of valid territories
+//ignores trailing newline on terr
+int isValidTerritory(char* terr){
+    if(terr == NULL){
+        fprintf(stderr, "Trying to validate empty string!");
+        return 0;
+    }
     int contains = 0;
 
-    key[strcspn(key, "\r\n")] = 0; //strip newline 
-    for(int i = 0; i < setNum && contains == 0; i++){
-        if(strcmp(key, set[i]) == 0){
+    terr[strcspn(terr, "\r\n")] = 0; //strip newline 
+    for(int i = 0; i < NUM_OF_TERRITORIES && contains == 0; i++){
+        if(strcmp(terr, validTerritories[i]) == 0){
             contains = 1;
         }
     }

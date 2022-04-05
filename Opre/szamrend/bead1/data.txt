@@ -1,10 +1,8 @@
-Jani aaaa 34lcs
- 1427621840
-Zoli|Csepel|5
-askjhá|sahgajá|5
-sjkash|slhas|6
-Jonas|Jonas|6
-Jani|Pest|155
-Tasi Zoltán|Szabolcs szatmar bereg megye|1555ű
-Jani beri|Terr|666
-asjdaskgdsal|sajkda|55
+Bela|Baratfa|5
+askjhá|Lovas|5
+sjkash|Szula|6
+Jonas|Kigyos-patak|6
+Jani|Malom telek|155
+Tasi Zoltán|Paskom|1555
+asjdaskgdsal|Szula|55
+Tapsi Hapsi|Baratfa|4
