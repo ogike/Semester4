@@ -16,29 +16,17 @@ CMyApp::~CMyApp()
 // egy parametrikus felület (u,v) paraméterértékekhez tartozó pontjának
 // kiszámítását végző függvény
 //
-glm::vec3 CMyApp::GetSpherePos(float u, float v)
+glm::vec3 CMyApp::GetPathPos(float t)
 {
-	// origó középpontú, egységsugarú gömb parametrikus alakja: http://hu.wikipedia.org/wiki/G%C3%B6mb#Egyenletek 
-	// figyeljünk:	matematikában sokszor a Z tengely mutat felfelé, de nálunk az Y, tehát a legtöbb képlethez képest nálunk
-	//				az Y és Z koordináták felcserélve szerepelnek
-	//GÖMB:
-	/*u *= 3.1415f;
-	v *= 3.1415f;
-	float r = 2;*/
+	float x, z;
+	float sinRange = 2; //range if input t: -1 to 1
+	float newRange = 10 - (-5); //desired range
 
-	//return glm::vec3( r*sin(v)*cos(u),
-	//				  r*cos(v),
-	//				  r*sin(v)*sin(u));
+	//translating t to be between -5 and +10
+	x = (((t + 1) * newRange) / sinRange) + (-5);
+	z = 0.15f * (float)pow(x, 2);
 
-	u *= 2 * 3.1415f;
-	v *= 2 * 3.1415f;
-
-	float r = 0.75f;
-	float R = 4;
-
-	return glm::vec3((R + r * cos(u)) * cos(v),
-		r * sin(u),
-		(R + r * cos(u)) * sin(v));
+	return glm::vec3(x, 0, z);
 }
 
 bool CMyApp::Init()
@@ -53,19 +41,19 @@ bool CMyApp::Init()
 	//
 	// geometria letrehozasa
 	//
-	// KOCKA VERTEXEI
+	// KOCKA VERTEXEI (unitL: egy él fele)
 	Vertex vert[] =
 	{
 		//position			 , color				//alsó lap
-		{glm::vec3(-unitL, -unitL, -unitL),	glm::vec3(1, 0, 0)},	//bal felső
-		{glm::vec3(+unitL, -unitL, -unitL),	glm::vec3(0, 1, 0)},	//jobb felső
-		{glm::vec3(-unitL, -unitL, +unitL),	glm::vec3(0, 0, 1)},	//bal alsó
-		{glm::vec3(+unitL, -unitL, +unitL),	glm::vec3(0, 1, 0)},	//jobb alsó
+		{glm::vec3(-unitL, 0, -unitL),	glm::vec3(1, 0, 0)},	//bal felső
+		{glm::vec3(+unitL, 0, -unitL),	glm::vec3(0, 1, 0)},	//jobb felső
+		{glm::vec3(-unitL, 0, +unitL),	glm::vec3(0, 0, 1)},	//bal alsó
+		{glm::vec3(+unitL, 0, +unitL),	glm::vec3(0, 1, 0)},	//jobb alsó
 													//felső lap
-		{glm::vec3(-unitL,  unitL, -unitL),	glm::vec3(1, 1, 1)},	//bal felső
-		{glm::vec3(+unitL,  unitL, -unitL),	glm::vec3(0, 0, 0)},	//jobb felső
-		{glm::vec3(-unitL,  unitL, +unitL),	glm::vec3(1, 1, 0)},	//bal alsó
-		{glm::vec3(+unitL,  unitL, +unitL),	glm::vec3(0, 1, 1)},	//jobb alsó
+		{glm::vec3(-unitL,  2*unitL, -unitL),	glm::vec3(1, 1, 1)},	//bal felső
+		{glm::vec3(+unitL,  2*unitL, -unitL),	glm::vec3(0, 0, 0)},	//jobb felső
+		{glm::vec3(-unitL,  2*unitL, +unitL),	glm::vec3(1, 1, 0)},	//bal alsó
+		{glm::vec3(+unitL,  2*unitL, +unitL),	glm::vec3(0, 1, 1)},	//jobb alsó
 	};
 
 	// kocka indexpuffer adatai, GL_TRIANGLES-el
@@ -238,31 +226,54 @@ void CMyApp::Render()
 
 	glm::mat4 viewProj;
 	glm::mat4 mvp;
+	glm::mat4 clusterTrans;
 
 	glm::vec3 pyramid_trans[] = {
 		glm::vec3(unitL * -4, 0, unitL * -4), //bal felső
 		glm::vec3(unitL * +4, 0, unitL * -4), //jobb felső
 		glm::vec3(unitL * -4, 0, unitL * +4), //bal alsó
 		glm::vec3(unitL * +4, 0, unitL * +4), //jobb alsó
-		glm::vec3(0, unitL * 4, 0) //középső felül
+		glm::vec3(0, unitL * sqrt(8), 0) //középső felül
 		//TODO: calculate élhossz for felső
 	};
 
-	// KÖZÉPSŐ ALAKZAT ///////////////////////////////////////////////
+	//// ORIGÓ /////////////////////////////////////////////////////////
+	//viewProj = m_camera.GetViewProj(); // returns projective * view
+	//mvp = viewProj;
 
-	for (glm::vec3 translation : pyramid_trans) {
-		m_matWorld = glm::translate<float>(translation) * glm::mat4(1.0f);
-		viewProj = m_camera.GetViewProj(); // returns projective * view
-		mvp = viewProj * m_matWorld;
+	//glUniformMatrix4fv(m_loc_mvp, 1, GL_FALSE, &(mvp[0][0]));
+	//glBindVertexArray(m_vaoID);
 
-		glUniformMatrix4fv(m_loc_mvp, 1, GL_FALSE, &(mvp[0][0]));
-		glBindVertexArray(m_vaoID);
+	//glDrawElements(GL_TRIANGLES, numOfIndices, GL_UNSIGNED_SHORT, 0);
 
-		glDrawElements(GL_TRIANGLES, numOfIndices, GL_UNSIGNED_SHORT, 0);	
+	//ALAKZATOK KIRAJZOLÁSA ///////////////////////////////////////////////
+	float sinT = SDL_GetTicks() / 1000.f * 2 * M_PI; //calculating 1 sec for sin()
+	sinT /= 8; //making the sin() period 8sec long
+
+	float clusterAlpha = 2 * M_PI / numOfClusters; //egy clusterhez tartozó fok a körben
+	float clusterCircleR = 15.f;
+
+	for (size_t i = 0; i < numOfClusters; i++)
+	{
+		//calculating the position of this cluster
+		clusterTrans = glm::translate<float>(glm::vec3(
+			clusterCircleR * cosf(clusterAlpha * i),
+			0, 
+			clusterCircleR * sinf(clusterAlpha * i)));
+
+		//drawing the individual cubes
+		for (glm::vec3 translation : pyramid_trans) {
+			m_matWorld = glm::translate<float>(translation) * clusterTrans;
+			m_matWorld *= glm::translate<float>(GetPathPos(sin(sinT))); //moving along the path
+			viewProj = m_camera.GetViewProj(); // returns projective * view
+			mvp = viewProj * m_matWorld;
+
+			glUniformMatrix4fv(m_loc_mvp, 1, GL_FALSE, &(mvp[0][0]));
+			glBindVertexArray(m_vaoID);
+
+			glDrawElements(GL_TRIANGLES, numOfIndices, GL_UNSIGNED_SHORT, 0);
+		}
 	}
-
-
-	// KÖZÉPSŐ ALAKZAT ///////////////////////////////////////////////
 
 	// VAO kikapcsolasa
 	glBindVertexArray(0);
@@ -274,6 +285,14 @@ void CMyApp::Render()
 void CMyApp::KeyboardDown(SDL_KeyboardEvent& key)
 {
 	m_camera.KeyboardDown(key);
+	if (key.keysym.sym == SDLK_KP_PLUS) {
+		numOfClusters++;
+		//std::cout << "plus" << std::endl;
+	}
+	else if (key.keysym.sym == SDLK_KP_MINUS && numOfClusters > 1) {
+		numOfClusters--;
+		//std::cout << "minus" << std::endl;
+	}
 }
 
 void CMyApp::KeyboardUp(SDL_KeyboardEvent& key)

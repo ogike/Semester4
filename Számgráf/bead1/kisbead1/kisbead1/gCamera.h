@@ -120,5 +120,7 @@ private:
 
 	float	m_goFw;
 	float	m_goRight;
+
+	glm::vec3 defPos = glm::vec3(-17, 23, -5);
 };
 

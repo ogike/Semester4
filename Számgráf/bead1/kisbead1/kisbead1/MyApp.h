@@ -35,7 +35,7 @@ public:
 	void Resize(int, int);
 protected:
 	// segédfüggvények
-	glm::vec3 GetSpherePos(float u, float v);
+	glm::vec3 GetPathPos(float t);
 
 	// shaderekhez szükséges változók
 	GLuint m_programID = 0; // shaderek programja
@@ -61,11 +61,9 @@ protected:
 		glm::vec3 c;
 	};
 
-	// NxM darab négyszöggel közelítjük a parametrikus felületünket => (N+1)x(M+1) pontban kell kiértékelni
-	static const int N = 40;
-	static const int M = 20;
-	
+	//feladathoz változók
 	int numOfIndices;
 	float unitL = 0.5f; //egy egységhossznak a fele
+	int numOfClusters = 1;
 };
 
