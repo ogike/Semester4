@@ -45,14 +45,14 @@ bool CMyApp::Init()
 	Vertex vert[] =
 	{
 		//position			 , color				//alsó lap
-		{glm::vec3(-unitL, 0, -unitL),	glm::vec3(1, 1, 1)},	//bal felső
-		{glm::vec3(+unitL, 0, -unitL),	glm::vec3(0, 0, 0)},	//jobb felső
-		{glm::vec3(-unitL, 0, +unitL),	glm::vec3(1, 1, 0)},	//bal alsó
-		{glm::vec3(+unitL, 0, +unitL),	glm::vec3(1, 0, 1)},	//jobb alsó
+		{glm::vec3(-unitL, 0, -unitL),	glm::vec3(1, 0, 0)},	//bal felső
+		{glm::vec3(+unitL, 0, -unitL),	glm::vec3(0, 1, 0)},	//jobb felső
+		{glm::vec3(-unitL, 0, +unitL),	glm::vec3(0, 0, 1)},	//bal alsó
+		{glm::vec3(+unitL, 0, +unitL),	glm::vec3(0, 1, 0)},	//jobb alsó
 													//felső lap
-		{glm::vec3(-unitL,  2*unitL, -unitL),	glm::vec3(1, 0, 0)},	//bal felső
-		{glm::vec3(+unitL,  2*unitL, -unitL),	glm::vec3(0, 1, 0)},	//jobb felső
-		{glm::vec3(-unitL,  2*unitL, +unitL),	glm::vec3(0, 0, 1)},	//bal alsó
+		{glm::vec3(-unitL,  2*unitL, -unitL),	glm::vec3(1, 1, 1)},	//bal felső
+		{glm::vec3(+unitL,  2*unitL, -unitL),	glm::vec3(0, 0, 0)},	//jobb felső
+		{glm::vec3(-unitL,  2*unitL, +unitL),	glm::vec3(1, 1, 0)},	//bal alsó
 		{glm::vec3(+unitL,  2*unitL, +unitL),	glm::vec3(0, 1, 1)},	//jobb alsó
 	};
 
@@ -239,13 +239,13 @@ void CMyApp::Render()
 	};
 	
 	//TODO: to test
-	glm::vec3 x_form_trans[] = {
-		glm::vec3(0, 0, 0), //közéspő
-		glm::vec3(unitL * +2, 0, 0), //jobb
-		glm::vec3(unitL * -2, 0, 0), //bal
-		glm::vec3(0, 0, unitL * +2), //felső
-		glm::vec3(0, 0, unitL * -2) //alsó
-	};
+	glm::vec3 x_form_trans[] ={
+		glm::vec3( 0, 0, 0 ), //közéspő
+		glm::vec3( unitL * +2, 0, 0 ), //jobb
+		glm::vec3( unitL * -2, 0, 0 ), //bal
+		glm::vec3( 0, 0, unitL * +2 ), //felső
+		glm::vec3( 0, 0, unitL * -2 ) //alsó
+	}
 
 	//// ORIGÓ /////////////////////////////////////////////////////////
 	//viewProj = m_camera.GetViewProj(); // returns projective * view
@@ -274,9 +274,11 @@ void CMyApp::Render()
 		//drawing the individual X-formations
 		for (glm::vec3 pyr_translation : pyramid_trans) {
 			
-			for(glm::vec3 x_form_translation : x_form_trans){
-				m_matWorld = glm::translate<float>(pyr_translation) * clusterTrans * glm::translate<float>(x_form_translation);
-				//m_matWorld *= glm::translate<float>(GetPathPos(sin(sinT))); //moving along the path
+			for(int x_ind = 0; i < 5; x_ind++){
+				xFormTrans = glm::translate<float>( x_form_trans[x_ind] );
+				
+				m_matWorld = glm::translate<float>(pyr_translation) * clusterTrans * xFormTrans;
+				m_matWorld *= glm::translate<float>(GetPathPos(sin(sinT))); //moving along the path
 				viewProj = m_camera.GetViewProj(); // returns projective * view
 				mvp = viewProj * m_matWorld;
 
