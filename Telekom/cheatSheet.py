@@ -1,4 +1,5 @@
 #### IMPORTS ############################################XXXX
+#region imports
 import sys
 import socket
 import random
@@ -6,7 +7,7 @@ import struct
 import select
 import json
 import hashlib
-
+#endregion imports
 
 #### SETTING UP CONNECTIONS #############################XXXX
 #region connections
@@ -43,7 +44,7 @@ packer_out = struct.Struct('i')
 
 # RECEIVING
 msg = tcp_sock.recv(packer_in.size)
-parsed_msg = packer_in.unpack(packer_in)
+parsed_msg = packer_in.unpack(msg)
 # SENDING
 msg_out = [1,2,3,4,5]
 msg_out_packed = packer_out.pack(*msg_out, 60) #this can be a *tuple, felsorolas, stb
@@ -134,7 +135,7 @@ while True:
 #endregion
 
 
-## TCP SERVING CLIENTS ##################################XXXX
+## UDP SERVING CLIENTS ##################################XXXX
 #region udp serving
 
 print("Waiting for clients...")
