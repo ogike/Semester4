@@ -37,7 +37,11 @@ export function App() {
     return (
         <BrowserRouter>
             <Layout>
+                {/* switch: alapból pattern matchel a path-ekre, akár több is jó lehet => switchel csak egyet választ? */}
+                {/*     de a path exact is ugyan azt csinálja */}
                 <Switch>
+                    {/* path: csak akkor fogja megjeleníteni a benne lévő kopmonenst, ha éppen az a pathunk (link) */}
+                    {/* ha változtatni akarunk path-et: link, 'to' attribútummal */}
                     <Route exact path="/">
                         <Home />
                     </Route>
