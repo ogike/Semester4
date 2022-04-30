@@ -55,18 +55,26 @@ int main(int argc, char *argv[])
     sh_mem_id = shmget(kulcs, MEMSIZE, IPC_CREAT | S_IRUSR | S_IWUSR);
     s = shmat(sh_mem_id, NULL, 0);
     //
-    semid = szemafor_letrehozas(argv[0], 0); // sem state is down!!!
-                                             //
+    semid = szemafor_letrehozas(argv[0], 1);
+
     child = fork();
     if (child > 0)
     {
-        char buffer[] = "I like Illes (Pop group:)!\n";
-        printf("Szulo indul, kozos memoriaba irja: %s\n", buffer);
-        sleep(4); // child waits during sleep
-        
-        strcpy(s, buffer);
-        printf("Szulo, szemafor up!\n"); //ideáig a szemafor foglalt
-        szemafor_muvelet(semid, 1); // Up
+        int running = 1;
+        while(running){
+            char buffer[MEMSIZE];
+            fgets(buffer, MEMSIZE, stdin); //vár a felhasználói inputra
+            printf("Szulo indul, kozos memoriaba irja: %s\n", buffer);
+            
+            szemafor_muvelet(semid, -1); // down
+            strcpy(s, buffer);
+            szemafor_muvelet(semid, 1); // Up
+
+            if( strcmp("exit\n", buffer) == 0 ){
+                running = 0;
+            }
+        }
+
 
         shmdt(s);                   // release shared memory
         wait(NULL);
@@ -75,12 +83,18 @@ int main(int argc, char *argv[])
     }
     else if (child == 0)
     {
+        int running = 1;
+        while(running){
+            sleep(3);
+            szemafor_muvelet(semid, -1); // down, wait if necessary
+            printf("Gyerek, down rendben, eredmeny: %s\n", s);
+            szemafor_muvelet(semid, 1); // up
 
-        // critical section
-        printf("Gyerek: Indula szemafor down!\n");
-        szemafor_muvelet(semid, -1); // down, wait if necessary
-        printf("Gyerek, down rendben, eredmeny: %s", s);
-        szemafor_muvelet(semid, 1); // up
+            if( strcmp("exit\n", s) == 0 ){
+                running = 0;
+            }
+        }
+
         // end of critical section
         shmdt(s);
     }
