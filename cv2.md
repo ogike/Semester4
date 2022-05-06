@@ -1,15 +1,24 @@
 <!-- title: Tasi Zoltán CV -->
 # Tasi Zoltán
-<div>
+<!-- <div>
     <img width="30%" style="display:inline-block; vertical-align:top; clip-path:circle(45%)" 
-        src="./cv_img.png" 
+        src="./cv_img_orig.jpg" 
         title="Eskü egy professzionális kép rólam"/>
     <div style="display:inline-block;padding-left:1em;font-weight:bold">
         Email: tasi.zoltan07@gmail.com <br>
         Phone: +36 20 955 7123
     </div>
 </div>
-<br>
+<br> -->
+<div>
+    <img width="130px" height="130px" style="display:inline-block; vertical-align:top; border-radius:50%" 
+        src="./cv_img_orig.jpg" 
+        title="Eskü egy professzionális kép rólam"/>
+    <div style="display:inline-block;padding-left:1em;font-weight:bold">
+        Email: tasi.zoltan07@gmail.com <br>
+        Phone: +36 20 955 7123
+    </div>
+</div>
 
 ## About me
 <p style="text-align:justify">
@@ -27,12 +36,12 @@
 - Experience with programming languages and related concepts:
   - **Python** for mathematics and networking
   - **C** and utilizing low-level memory management
-  - **Unity** prototypes in C#
   - CLI RPG game developed in **C++**
-  - Functional programming knowledge from **Haskell**
   - GUI applications in **Java** Swing
   - Basic **SQL** and handling databases
-  - Deeper knowledge of vanilla **JavaScript**
+  - Functional programming knowledge from **Haskell**
+  - **Unity** prototypes in C#
+  - Vanilla **JavaScript**
   - **CSS** and **HTML**
   - **PHP**
   - Unit testing
