@@ -1,7 +1,7 @@
 <!-- title: Tasi Zoltán CV -->
 # Tasi Zoltán
 <div>
-    <img width="20%" style="display:inline-block;vertical-align:top;" 
+    <img width="30%" style="display:inline-block; vertical-align:top; clip-path:circle(45%)" 
         src="./cv_img.png" 
         title="Eskü egy professzionális kép rólam"/>
     <div style="display:inline-block;padding-left:1em;font-weight:bold">
@@ -18,22 +18,28 @@
 </p>    
 
 ## Education
+- **ELTE IK BSc**: On my fourth semester of the Computer Sciences curriculum
 - Kossuth Lajos Bilingual Vocational Secondary School of Technology
-- ELTE IK BSc: On my fourth semester of the Computer Sciences curriculum
 
 ## Skills
 - Some experience with socket programming and basic networking knowledge
-- Experience with Linux, SSH, and Git
-- OOP concepts
+- Experience with **Linux**, **SSH**, and **Git**
 - Experience with programming languages and related concepts:
-  - Python for mathematics and networking
-  - C and utilizing low-level memory management
-  - Unity prototypes in C#
-  - CLI RPG game developed in C++
-  - Functional programming knowledge from Haskell
-  - GUI applications in Java Swing
-  - Basic SQL, handling databases
-  - Currently learning ReactJS, and OpenGL with C++
+  - **Python** for mathematics and networking
+  - **C** and utilizing low-level memory management
+  - **Unity** prototypes in C#
+  - CLI RPG game developed in **C++**
+  - Functional programming knowledge from **Haskell**
+  - GUI applications in **Java** Swing
+  - Basic **SQL** and handling databases
+  - Deeper knowledge of vanilla **JavaScript**
+  - **CSS** and **HTML**
+  - **PHP**
+  - Unit testing
+  - Object oriented programming concepts
+- Currently learning
+  - ReactJS
+  - OpenGL with C++ for Computer Graphics
 
 ## Languages
 - Native Hungarian
