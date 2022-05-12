@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
 	}
 	char buffer[100]; // mq_send, mq_receive uses char array
 	printf("Buffer length: %d\n", strlen(buffer));
+	
 	child = fork();
 	if (child > 0)
 	{

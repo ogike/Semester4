@@ -42,7 +42,7 @@ int main(){
 
     printf("The program comes back from suspending\n");
     int status;
-    wait(&status);
+    wait(&status); //"A call to wait() blocks the calling process until one of its child processes exits or a signal is received.""
     printf("Parent process ended\n");
   }
   else 

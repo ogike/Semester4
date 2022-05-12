@@ -22,12 +22,16 @@ int main()
  if (child>0) //the parent process, it can see the returning value of fork - the child variable!
  {
     waitpid(child,&status,0); 
-    //waits the end of child process PID number=child, the returning value will be in status
+    //waits the end of child process (PID number=child), the returning value will be in status
     //0 means, it really waits for the end of child process - the same as wait(&status)
+
+    //sima wait(&status): A call to wait() blocks the calling process -
+    //   until one of its child processes exits or a signal is received.
+
     printf("The value is %i in parent process (remain the original) \n",notacommonvalue);
  
  }
- else //child process
+ else //child process = 0
  {
     notacommonvalue=5; //it changes the value of the copy of the variable
     printf("The value is %i in child process \n",notacommonvalue);
