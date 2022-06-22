@@ -1,0 +1,24 @@
+1. elõadás: minden
+	
+2. elõadás, de a zártsági tétel i=0 és i=1 esetével kapcsolatban nem fogok gyakorlati kérdést feltenni, a konstrukciók helyességének bizonyítását nem kell tudni
+	
+3. elõadásról Arden tételének bizonyítását nem kérdezem, illetve az utolsó tétel bizonyításából az E_ij^k halmazok konstrukcióját kell csak tudni, de ezzel kapcsolatban csak elméleti kérdéseim lesznek. 
+	
+4. elõadás: minden (a konstrukciók helyességének bizonyításást nem kell tudni)
+	
+5. elõadás: 1-2. Lemmát és bizonyításukat nem kérdezem
+	
+6. elõadás: A Myhill-Nerode tétel bizonyítását nem kell tudni, kivéve A_L^MN automata konstrukciója. A faktorautomatás tétel bizonyítását nem kell tudni, lemmáit se.
+	
+7. elõadás: innen csak a következõket kell tudni:
+	maradéknyelvek fogalma, hogyan kell felírni az automatára a nyelvi egyenletrendszert, hogyan kell megoldani, általánosított automata, epszilon-átmenetes automata, def.-k, tételek kimondása, a VDA-t készítõ algoritmus lépései, kis BH lemma (csak kimondani) 
+	
+8. elõadás: minden (az algoritmusok helyességének bizonyításást nem kell tudni, de lépéseit nagyon is!)
+	
+9. elõadás: minden, kivéve a két lemma és a két tétel bizonyítása a végén
+	
+10. elõadás: minden, kivéve a bizonyítások
+	
+11. elõadás minden (az algoritmusok helyességének bizonyításást nem kell tudni, de lépéseit igen). Az itt szereplõ algoritmusokkal kapcsolatban nem teszek fel gyakorlati kérdést (azaz olyat, ahol egy konkrét lépést be kéne mutatni).
+	
+12. elõadás: innen semmit se kérdezek
